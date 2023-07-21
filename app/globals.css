@@ -20,3 +20,9 @@ body {
 .fade-in {
   animation: fadeIn 0.5s;
 }
+
+@media screen and (max-width: 600px) {
+  .center-div {
+    margin-top: 50px;
+  }
+}

@@ -64,11 +64,13 @@ const HomePage = () => {
           responseType: "blob",
         }
       );
-      const blob =  response.data;
+      const blob = response.data;
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `${videoTitle}${selectedQuality === "Audio" ? ".mp3" : ".mp4"}`;
+      a.download = `${videoTitle}${
+        selectedQuality === "Audio" ? ".mp3" : ".mp4"
+      }`;
       a.click();
       URL.revokeObjectURL(url);
     } catch (error) {
@@ -81,7 +83,7 @@ const HomePage = () => {
   return (
     <main className="min-w-full backdrop-blur-sm">
       <div className="flex justify-center items-center text-center min-h-screen">
-        <div className="w-full md:w-1/2 lg:w-1/3 p-4 bg-gray-600 opacity-80 shadow-lg rounded-lg">
+        <div className="center-div w-full md:w-1/2 lg:w-1/3 p-4 bg-gray-600 opacity-80 shadow-lg rounded-lg">
           <h1
             className={`${sono.className} text-2xl font-bold mb-4 text-orange-500`}
           >
