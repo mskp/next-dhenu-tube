@@ -81,7 +81,7 @@ const HomePage = () => {
   };
 
   return (
-    <main className="min-w-full backdrop-blur-sm">
+    <main className="min-w-full min-h-screen backdrop-blur-sm">
       <div className="flex justify-center items-center text-center min-h-screen">
         <div className="center-div w-full md:w-1/2 lg:w-1/3 p-4 bg-gray-600 opacity-80 shadow-lg rounded-lg">
           <h1
