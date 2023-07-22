@@ -12,7 +12,6 @@ body {
   background-image: url("/bg_cow.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100svh;
 }
 
 @keyframes fadeIn {
