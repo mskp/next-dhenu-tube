@@ -13,7 +13,8 @@ const HomePage = () => {
   const [videoTitle, setVideoTitle] = useState("");
   const [thumbnailUrl, setThumbnailUrl] = useState("");
   const [selectedQuality, setSelectedQuality] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   useEffect(() => {
     if (youtubeVideoUrl) {
@@ -26,7 +27,7 @@ const HomePage = () => {
   }, [youtubeVideoUrl]);
 
   const fetchVideoInfo = async () => {
-    setIsLoading(true);
+    setIsFetching(true);
     if (!youtubeVideoUrl) throw new Error("Invalid YouTube video URL");
     try {
       const response = await axios.post("/api/getYoutubeVideoDetails", {
@@ -42,7 +43,7 @@ const HomePage = () => {
       setThumbnailUrl("");
       setAvailableQualities([]);
     } finally {
-      setIsLoading(false);
+      setIsFetching(false);
     }
   };
 
@@ -52,7 +53,7 @@ const HomePage = () => {
 
   const handleDownload = async () => {
     if (!youtubeVideoUrl || !selectedQuality) return;
-    setIsLoading(true);
+    setIsDownloading(true);
     try {
       const response = await axios.post(
         "/api/downloadVideo",
@@ -76,7 +77,7 @@ const HomePage = () => {
     } catch (error) {
       console.error("Error initiating download:", error.message);
     } finally {
-      setIsLoading(false);
+      setIsDownloading(false);
     }
   };
 
@@ -87,7 +88,7 @@ const HomePage = () => {
           <h1
             className={`${sono.className} text-2xl font-bold mb-4 text-orange-500`}
           >
-            🐮DhenuTube: Youtube video downloader
+            🐮DhenuTube
           </h1>
 
           <div className="mb-8">
@@ -97,19 +98,19 @@ const HomePage = () => {
               onChange={(e) => {
                 setYoutubeVideoUrl(e.target.value);
               }}
-              className="bg-lime-700 text-white w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
-              placeholder="Enter YouTube video URL"
+              className="bg-transparent text-white w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-indigo-950"
+              placeholder="Paste the youtube video link here"
             />
           </div>
 
           <div className="mb-4">
             <button
               onClick={fetchVideoInfo}
-              disabled={!youtubeVideoUrl || isLoading}
+              disabled={!youtubeVideoUrl || isFetching}
               className="w-full md:w-1/2
-            bg-blue-500 text-white px-4 py-2 rounded-lg"
+            bg-indigo-950 text-white px-4 py-2 rounded-lg"
             >
-              {isLoading ? "Fetching..." : "Fetch Info"}
+              {isFetching ? "Fetching..." : "Fetch Info"}
             </button>
           </div>
 
@@ -123,12 +124,12 @@ const HomePage = () => {
             </div>
           )}
 
-          {videoTitle && <div className="text-white mb-2">{videoTitle}</div>}
+          {videoTitle && <div className="text-white mb-2 underline">{videoTitle}</div>}
 
           {availableQualities && availableQualities.length > 0 && (
             <div className="text-white">
               <h4 className="mb-2">Select Quality:</h4>
-              <ul className={`mb-4 ${isLoading ? "" : "fade-in"}`}>
+              <ul className={`mb-4 ${isFetching ? "" : "fade-in"}`}>
                 {availableQualities.map((quality) => (
                   <li
                     key={quality}
@@ -137,8 +138,8 @@ const HomePage = () => {
                     }
                     className={`cursor-pointer border-4 bg-slate-700 mb-2 hover:opacity-60 ${
                       quality === selectedQuality
-                        ? "border-2 border-green-500"
-                        : "border-blue-500"
+                        ? "border-2 border-pink-600"
+                        : "border-indigo-950"
                     } p-2 rounded-md`}
                   >
                     {quality}
@@ -152,10 +153,10 @@ const HomePage = () => {
             <div className="mb-4">
               <button
                 onClick={handleDownload}
-                disabled={isLoading}
-                className="w-full md:w-1/2 bg-blue-500 text-white px-4 py-2 rounded-lg"
+                disabled={isDownloading}
+                className="w-full md:w-1/2 bg-indigo-950 text-white px-4 py-2 rounded-lg"
               >
-                {isLoading ? "Downloading..." : "Download"}
+                {isDownloading ? "Downloading..." : "Download"}
               </button>
             </div>
           )}

@@ -1,6 +1,5 @@
 import ytdl from "ytdl-core";
 
-// Take the youtube video url and return details about it
 export async function getYoutubeVideoDetails(youtubeUrl) {
   try {
     const videoInfo = await ytdl.getInfo(youtubeUrl);
