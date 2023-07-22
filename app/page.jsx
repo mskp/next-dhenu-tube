@@ -3,11 +3,10 @@
 import { useState, useEffect } from "react";
 import { Sono } from "next/font/google";
 import axios from "axios";
-import { downloadFile } from "@/utils/functions";
 
 const sono = Sono({ subsets: ["latin"], weight: "800" });
 
-const HomePage = () => {
+export default function HomePage() {
   const [youtubeVideoUrl, setYoutubeVideoUrl] = useState("");
   const [availableQualities, setAvailableQualities] = useState([]);
   const [videoTitle, setVideoTitle] = useState("");
@@ -124,7 +123,9 @@ const HomePage = () => {
             </div>
           )}
 
-          {videoTitle && <div className="text-white mb-2 underline">{videoTitle}</div>}
+          {videoTitle && (
+            <div className="text-white mb-2 underline">{videoTitle}</div>
+          )}
 
           {availableQualities && availableQualities.length > 0 && (
             <div className="text-white">
@@ -164,6 +165,4 @@ const HomePage = () => {
       </div>
     </main>
   );
-};
-
-export default HomePage;
+}
