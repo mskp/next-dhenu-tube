@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 const sono = Sono({ subsets: ["latin"], weight: "800" });
 
 export default function HomePage() {
-  const router = useRouter();
+  const router= useRouter();
   const [youtubeVideoUrl, setYoutubeVideoUrl] = useState("");
   const [availableQualities, setAvailableQualities] = useState([]);
   const [videoTitle, setVideoTitle] = useState("");
@@ -69,16 +69,12 @@ export default function HomePage() {
       // }`;
       // a.click();
       // URL.revokeObjectURL(url);
-      router.push(response.data.downloadUrl)
+      console.log(response.data);
+      router.replace(response.data.downloadUrl)
     } catch (error) {
       console.error("Error initiating download:", error.message);
     } finally {
-      setYoutubeVideoUrl("");
-      setVideoTitle("");
-      setThumbnailUrl("");
       setIsDownloading(false);
-      setAvailableQualities([]);
-      setSelectedQuality("");
     }
   };
 
@@ -159,7 +155,7 @@ export default function HomePage() {
                 disabled={isDownloading}
                 className="w-full md:w-1/2 bg-indigo-950 text-white px-4 py-2 rounded-lg"
               >
-                {isDownloading ? "Downloading..." : "Download"}
+                {isDownloading ? "Wait..." : "Download"}
               </button>
             </div>
           )}
