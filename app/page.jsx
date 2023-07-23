@@ -78,6 +78,7 @@ export default function HomePage() {
       setThumbnailUrl("");
       setIsDownloading(false);
       setAvailableQualities([]);
+      setSelectedQuality("");
     }
   };
 
