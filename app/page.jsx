@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 const sono = Sono({ subsets: ["latin"], weight: "800" });
 
 export default function HomePage() {
-  const router= useRouter();
+  const router = useRouter();
   const [youtubeVideoUrl, setYoutubeVideoUrl] = useState("");
   const [availableQualities, setAvailableQualities] = useState([]);
   const [videoTitle, setVideoTitle] = useState("");
@@ -69,8 +69,8 @@ export default function HomePage() {
       // }`;
       // a.click();
       // URL.revokeObjectURL(url);
-      console.log(response.data);
-      router.replace(response.data.downloadUrl)
+      router.push(response.data.downloadUrl);
+      // router.replace(response.data.downloadUrl)
     } catch (error) {
       console.error("Error initiating download:", error.message);
     } finally {
@@ -79,8 +79,11 @@ export default function HomePage() {
   };
 
   return (
+    // <main className="min-w-full min-h-screen backdrop-blur-sm">
+    //   <div className="flex justify-center items-center text-center min-h-screen">
+    //     <div className="center-div w-full md:w-1/2 lg:w-1/3 p-4 bg-gray-600 opacity-80 shadow-lg rounded-lg">
     <main className="min-w-full min-h-screen backdrop-blur-sm">
-      <div className="flex justify-center items-center text-center min-h-screen">
+      <div className="flex justify-center items-start text-center min-h-screen pt-4">
         <div className="center-div w-full md:w-1/2 lg:w-1/3 p-4 bg-gray-600 opacity-80 shadow-lg rounded-lg">
           <h1
             className={`${sono.className} text-2xl font-bold mb-4 text-orange-500`}
