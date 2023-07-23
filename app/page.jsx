@@ -73,7 +73,9 @@ export default function HomePage() {
     } catch (error) {
       console.error("Error initiating download:", error.message);
     } finally {
-      setIsDownloading(false);
+      setVideoTitle("");
+      setThumbnailUrl("");
+      setAvailableQualities([]);
     }
   };
 
