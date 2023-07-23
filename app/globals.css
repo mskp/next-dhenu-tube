@@ -9,7 +9,7 @@
 }
 
 body {
-  background-image: url("/bg_cow.jpg");
+  background-image: url("/bg_cow_comp.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   overflow-y: scroll;
