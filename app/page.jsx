@@ -73,8 +73,10 @@ export default function HomePage() {
     } catch (error) {
       console.error("Error initiating download:", error.message);
     } finally {
+      setYoutubeVideoUrl("");
       setVideoTitle("");
       setThumbnailUrl("");
+      setIsDownloading(false);
       setAvailableQualities([]);
     }
   };
