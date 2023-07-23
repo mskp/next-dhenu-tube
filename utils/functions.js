@@ -32,7 +32,7 @@ export async function getAvailableUniqueFormats(youtubeVideoUrl) {
           f.hasVideo === format.hasVideo
       );
 
-      if (!existingFormat && format.hasAudio && format.hasVideo) unique.push(format);
+      if (!existingFormat && format.hasAudio) unique.push(format);
 
       return unique;
     }, []);

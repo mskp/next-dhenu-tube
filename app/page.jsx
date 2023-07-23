@@ -3,10 +3,12 @@
 import { useState, useEffect } from "react";
 import { Sono } from "next/font/google";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const sono = Sono({ subsets: ["latin"], weight: "800" });
 
 export default function HomePage() {
+  const router = useRouter();
   const [youtubeVideoUrl, setYoutubeVideoUrl] = useState("");
   const [availableQualities, setAvailableQualities] = useState([]);
   const [videoTitle, setVideoTitle] = useState("");
@@ -54,25 +56,20 @@ export default function HomePage() {
     if (!youtubeVideoUrl || !selectedQuality) return;
     setIsDownloading(true);
     try {
-      const response = await axios.post(
-        "/api/downloadVideo",
-        {
-          youtubeUrl: youtubeVideoUrl,
-          selectedQuality,
-        },
-        {
-          responseType: "blob",
-        }
-      );
-      const blob = response.data;
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `${videoTitle}${
-        selectedQuality === "Audio" ? ".mp3" : ".mp4"
-      }`;
-      a.click();
-      URL.revokeObjectURL(url);
+      const response = await axios.post("/api/getDownloadUrl", {
+        youtubeUrl: youtubeVideoUrl,
+        selectedQuality,
+      });
+      // const blob = response.data;
+      // const url = URL.createObjectURL(blob);
+      // const a = document.createElement("a");
+      // a.href = url;
+      // a.download = `${videoTitle}${
+      //   selectedQuality === "Audio" ? ".mp3" : ".mp4"
+      // }`;
+      // a.click();
+      // URL.revokeObjectURL(url);
+      router.push(response.data.downloadUrl)
     } catch (error) {
       console.error("Error initiating download:", error.message);
     } finally {

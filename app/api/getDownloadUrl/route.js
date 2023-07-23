@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { getDownloadUrl } from "@/utils/functions";
-import axios from "axios";
 
 export async function POST(req) {
   try {
@@ -12,9 +11,7 @@ export async function POST(req) {
 
     const downloadUrl = await getDownloadUrl(youtubeUrl, selectedQuality);
 
-    const response = await axios.get(downloadUrl, {responseType: "stream"})
-
-    return new NextResponse(response.data);
+    return NextResponse.json({ downloadUrl });
   } catch (error) {
     return NextResponse.json(
       { success: false, message: error.message },
