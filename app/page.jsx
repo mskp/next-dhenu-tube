@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 const sono = Sono({ subsets: ["latin"], weight: "800" });
 
 export default function HomePage() {
-  const router = useRouter();
   const [youtubeVideoUrl, setYoutubeVideoUrl] = useState("");
   const [availableQualities, setAvailableQualities] = useState([]);
   const [videoTitle, setVideoTitle] = useState("");
@@ -16,6 +15,8 @@ export default function HomePage() {
   const [selectedQuality, setSelectedQuality] = useState("");
   const [isFetching, setIsFetching] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     if (youtubeVideoUrl) {
@@ -48,40 +49,27 @@ export default function HomePage() {
     }
   };
 
-  const handleQualityChange = (e) => {
-    setSelectedQuality(e.target.value);
-  };
+  const handleQualityChange = (e) => setSelectedQuality(e.target.value);
 
   const handleDownload = async () => {
-    if (!youtubeVideoUrl || !selectedQuality) return;
-    setIsDownloading(true);
     try {
+      if (!youtubeVideoUrl || !selectedQuality) return;
+      setIsDownloading(true);
+
       const response = await axios.post("/api/getDownloadUrl", {
         youtubeUrl: youtubeVideoUrl,
         selectedQuality,
       });
-      // const blob = response.data;
-      // const url = URL.createObjectURL(blob);
-      // const a = document.createElement("a");
-      // a.href = url;
-      // a.download = `${videoTitle}${
-      //   selectedQuality === "Audio" ? ".mp3" : ".mp4"
-      // }`;
-      // a.click();
-      // URL.revokeObjectURL(url);
-      router.push(response.data.downloadUrl);
-      // router.replace(response.data.downloadUrl)
+      const a = document.createElement("a");
+      a.href = response.data.downloadUrl;
+      a.click();
+      URL.revokeObjectURL(url);
+      return router.refresh();
     } catch (error) {
-      console.error("Error initiating download:", error.message);
-    } finally {
-      setIsDownloading(false);
+      console.error(error.message);
     }
   };
-
   return (
-    // <main className="min-w-full min-h-screen backdrop-blur-sm">
-    //   <div className="flex justify-center items-center text-center min-h-screen">
-    //     <div className="center-div w-full md:w-1/2 lg:w-1/3 p-4 bg-gray-600 opacity-80 shadow-lg rounded-lg">
     <main className="min-w-full min-h-screen backdrop-blur-sm">
       <div className="flex justify-center items-start text-center min-h-screen pt-4">
         <div className="center-div w-full md:w-1/2 lg:w-1/3 p-4 bg-gray-600 opacity-80 shadow-lg rounded-lg">
@@ -158,7 +146,7 @@ export default function HomePage() {
                 disabled={isDownloading}
                 className="w-full md:w-1/2 bg-indigo-950 text-white px-4 py-2 rounded-lg"
               >
-                {isDownloading ? "Wait..." : "Download"}
+                {isDownloading ? "Redirecting" : "Download"}
               </button>
             </div>
           )}
