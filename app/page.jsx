@@ -77,7 +77,7 @@ export default function HomePage() {
   return (
     <main className="min-w-full min-h-screen backdrop-blur-sm">
       <div className="flex justify-center items-start text-center min-h-screen pt-4">
-        <div className="center-div w-full md:w-1/2 lg:w-1/3 p-4 bg-gray-600 opacity-80 shadow-lg rounded-lg">
+        <div className="center-div w-full md:w-1/2 lg:w-1/3 p-4 bg-gray-900 opacity-80 shadow-lg rounded-lg">
           <h1
             className={`${sono.className} text-2xl font-bold mb-4 text-orange-500`}
           >
@@ -101,7 +101,7 @@ export default function HomePage() {
               onClick={fetchVideoInfo}
               disabled={!youtubeVideoUrl || isFetching}
               className="w-full md:w-1/2
-            bg-indigo-950 text-white px-4 py-2 rounded-lg"
+            bg-indigo-900 text-white px-4 py-2 rounded-lg"
             >
               {isFetching ? "Fetching..." : "Fetch Info"}
             </button>
@@ -149,7 +149,7 @@ export default function HomePage() {
               <button
                 onClick={handleDownload}
                 disabled={isDownloading}
-                className="w-full md:w-1/2 bg-indigo-950 text-white px-4 py-2 rounded-lg"
+                className="w-full md:w-1/2 bg-indigo-900 text-white px-4 py-2 rounded-lg"
               >
                 {isDownloading ? "Redirecting..." : "Download"}
               </button>

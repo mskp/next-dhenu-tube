@@ -48,9 +48,3 @@ body::-webkit-scrollbar-thumb:hover {
     margin-top: 50px;
   }
 }
-
-@media screen and (max-width: 767px) {
-  body {
-    background: #1b1b1b;
-  }
-}
