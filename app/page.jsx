@@ -72,7 +72,10 @@ export default function HomePage() {
       setThumbnailUrl("");
       setAvailableQualities([]);
       setIsFetching(false);
+      setYoutubeVideoUrl("")
+      setSelectedQuality("")
     }
+
   };
   return (
     <main className="min-w-full min-h-screen backdrop-blur-sm">
