@@ -64,10 +64,10 @@ export default function HomePage() {
       a.href = response.data.downloadUrl;
       a.target = "_blank";
       a.click();
-      URL.revokeObjectURL(url);
-      return router.refresh();
     } catch (error) {
       console.error(error.message);
+    } finally {
+      router.refresh();
     }
   };
   return (
