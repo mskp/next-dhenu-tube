@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { Sono } from "next/font/google";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 
 const sono = Sono({ subsets: ["latin"], weight: "800" });
 
@@ -15,8 +14,6 @@ export default function HomePage() {
   const [selectedQuality, setSelectedQuality] = useState("");
   const [isFetching, setIsFetching] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
-
-  const router = useRouter();
 
   useEffect(() => {
     if (youtubeVideoUrl) {
@@ -154,7 +151,7 @@ export default function HomePage() {
                 disabled={isDownloading}
                 className="w-full md:w-1/2 bg-indigo-950 text-white px-4 py-2 rounded-lg"
               >
-                {isDownloading ? "Redirecting" : "Download"}
+                {isDownloading ? "Redirecting..." : "Download"}
               </button>
             </div>
           )}
