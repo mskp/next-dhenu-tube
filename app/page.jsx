@@ -67,7 +67,11 @@ export default function HomePage() {
     } catch (error) {
       console.error(error.message);
     } finally {
-      router.refresh();
+      setIsDownloading(false);
+      setVideoTitle("");
+      setThumbnailUrl("");
+      setAvailableQualities([]);
+      setIsFetching(false);
     }
   };
   return (
