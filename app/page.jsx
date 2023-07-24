@@ -62,6 +62,7 @@ export default function HomePage() {
       });
       const a = document.createElement("a");
       a.href = response.data.downloadUrl;
+      a.target = "_blank";
       a.click();
       URL.revokeObjectURL(url);
       return router.refresh();
