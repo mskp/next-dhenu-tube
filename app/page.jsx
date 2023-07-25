@@ -1,12 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Sono } from "next/font/google";
 import axios from "axios";
 
-const sono = Sono({ subsets: ["latin"], weight: "800" });
-
-export default function HomePage() {
+export default function HomePage({sono}) {
   const [youtubeVideoUrl, setYoutubeVideoUrl] = useState("");
   const [availableQualities, setAvailableQualities] = useState([]);
   const [videoTitle, setVideoTitle] = useState("");
