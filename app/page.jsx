@@ -2,9 +2,6 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Sono } from "next/font/google"
-
-const sono = Sono({ subsets: ["latin"], weight: "800" });
 
 export default function HomePage() {
   const [youtubeVideoUrl, setYoutubeVideoUrl] = useState("");
@@ -85,16 +82,12 @@ export default function HomePage() {
   return (
     <main className="min-w-full min-h-screen backdrop-blur-sm">
       <div className="flex justify-center items-start text-center min-h-screen pt-4">
-        <div className="center-div w-full md:w-1/2 lg:w-1/3 p-4 bg-gray-900 opacity-80 shadow-lg rounded-lg">
-          <h1
-            className={`${sono.className} text-2xl font-bold mb-4 text-orange-500`}
-          >
-            🐮DhenuTube
-          </h1>
+        <div className="center-div w-full md:w-1/2 lg:w-1/3 p-4 opacity-80">
+          <h1 className="text-xl text-white p-4">Download YouTube Videos</h1>
 
           <div className="mb-8 relative">
-            <div className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-red-400 p-1 rounded">
-              <button onClick={handlePaste} className="text-white">
+            <div className="hover:bg-slate-800 hover:opacity-80 absolute right-2 top-1/2 transform -translate-y-1/2 border p-1 rounded">
+              <button onClick={handlePaste} type="button" className="text-white">
                 Paste
               </button>
             </div>
@@ -104,7 +97,7 @@ export default function HomePage() {
               onChange={(e) => {
                 setYoutubeVideoUrl(e.target.value);
               }}
-              className="bg-transparent text-white w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-indigo-950 pr-16"
+              className="bg-transparent text-white w-full px-5 py-4 border rounded-lg outline-none pr-16"
               placeholder="Paste the youtube video link here"
             />
           </div>
@@ -113,10 +106,10 @@ export default function HomePage() {
             <button
               onClick={fetchVideoInfo}
               disabled={!youtubeVideoUrl || isFetching}
-              className="w-full md:w-1/2
-            bg-indigo-900 text-white px-4 py-2 rounded-lg"
+              style={{ background: "#1a4940" }}
+              className={`w-full md:w-1/2 text-white px-4 py-2 rounded-lg ${!(!youtubeVideoUrl || isFetching) && 'hover:opacity-80'}`}
             >
-              {isFetching ? "Fetching..." : "Fetch Info"}
+              {isFetching ? "Wait..." : "Proceed"}
             </button>
           </div>
 
@@ -131,7 +124,7 @@ export default function HomePage() {
           )}
 
           {videoTitle && (
-            <div className="text-white mb-2 underline">{videoTitle}</div>
+            <div className="text-white mb-2 font-bold">{videoTitle}</div>
           )}
 
           {availableQualities && availableQualities.length > 0 && (
@@ -144,9 +137,9 @@ export default function HomePage() {
                     onClick={() =>
                       handleQualityChange({ target: { value: quality } })
                     }
-                    className={`cursor-pointer border-4 bg-slate-700 mb-2 hover:opacity-60 ${quality === selectedQuality
-                      ? "border-2 border-pink-600"
-                      : "border-indigo-950"
+                    className={`cursor-pointer border mb-2 hover:opacity-60 ${quality === selectedQuality
+                      ? "bg-slate-800"
+                      : ""
                       } p-2 rounded-md`}
                   >
                     {quality}
@@ -161,7 +154,8 @@ export default function HomePage() {
               <button
                 onClick={handleDownload}
                 disabled={isDownloading}
-                className="w-full md:w-1/2 bg-indigo-900 text-white px-4 py-2 rounded-lg"
+                style={{ background: "#1a4940" }}
+                className={`w-full md:w-1/2 text-white px-4 py-2 rounded-lg hover:opacity-80`}
               >
                 {isDownloading ? "Redirecting..." : "Download"}
               </button>

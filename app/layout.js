@@ -1,17 +1,22 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
+import Header from "@/components/Header/Header";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({ subsets: ["latin"], weight: "200" });
 
 export const metadata = {
-  title: "DhenuTube: Youtube video downloader",
-  manifest: "/manifest.json",
-};
+  title: 'DhenuTube - Download YouTube Videos',
+  description: 'Seamless YouTube Video Downloads: Instantly save and enjoy videos offline with our efficient YouTube Video Downloader. Your gateway to convenient entertainment, anytime.',
+  manifest: "/manifest.json"
+}
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${inter.className}`}>{children}</body>
+      <body className={`${poppins.className}`}>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
