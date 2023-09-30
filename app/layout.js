@@ -1,8 +1,9 @@
 import "./globals.css";
-import { Poppins } from "next/font/google";
+import { Poppins, Pacifico } from "next/font/google";
 import Header from "@/components/Header/Header";
 
 const poppins = Poppins({ subsets: ["latin"], weight: "200" });
+const pacifico = Pacifico({ subsets: ["latin"], weight: "400" });
 
 export const metadata = {
   title: 'DhenuTube - Download YouTube Videos',
@@ -14,7 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${poppins.className}`}>
-        <Header />
+        <Header pacifico={pacifico}/>
         {children}
       </body>
     </html>

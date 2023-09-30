@@ -86,7 +86,7 @@ export default function HomePage() {
           <h1 className="text-xl text-white p-4">Download YouTube Videos</h1>
 
           <div className="mb-8 relative">
-            <div className="hover:bg-slate-800 hover:opacity-80 absolute right-2 top-1/2 transform -translate-y-1/2 border p-1 rounded">
+            <div className="hover:bg-slate-800 hover:opacity-80 absolute right-2 top-1/2 transform -translate-y-1/2 border p-1 rounded bg-indigo-900">
               <button onClick={handlePaste} type="button" className="text-white">
                 Paste
               </button>
