@@ -106,8 +106,7 @@ export default function HomePage() {
             <button
               onClick={fetchVideoInfo}
               disabled={!youtubeVideoUrl || isFetching}
-              style={{ background: "#1a4940" }}
-              className={`w-full md:w-1/2 text-white px-4 py-2 rounded-lg ${!(!youtubeVideoUrl || isFetching) && 'hover:opacity-80'}`}
+              className={`w-full md:w-1/2 text-white px-4 py-2 rounded-lg bg-gray-800 border ${!(!youtubeVideoUrl || isFetching) && 'hover:opacity-80'}`}
             >
               {isFetching ? "Wait..." : "Proceed"}
             </button>
@@ -138,8 +137,8 @@ export default function HomePage() {
                       handleQualityChange({ target: { value: quality } })
                     }
                     className={`cursor-pointer border mb-2 hover:opacity-60 ${quality === selectedQuality
-                      ? "bg-slate-800"
-                      : ""
+                      ? "bg-orange-800"
+                      : "bg-slate-950"
                       } p-2 rounded-md`}
                   >
                     {quality}
@@ -154,8 +153,7 @@ export default function HomePage() {
               <button
                 onClick={handleDownload}
                 disabled={isDownloading}
-                style={{ background: "#1a4940" }}
-                className={`w-full md:w-1/2 text-white px-4 py-2 rounded-lg hover:opacity-80`}
+                className={`w-full md:w-1/2 text-white px-4 py-2 rounded-lg hover:opacity-80 bg-gray-800 border`}
               >
                 {isDownloading ? "Redirecting..." : "Download"}
               </button>
