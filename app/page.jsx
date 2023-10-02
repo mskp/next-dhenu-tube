@@ -83,11 +83,17 @@ export default function HomePage() {
     <main className="min-w-full min-h-screen backdrop-blur-sm">
       <div className="flex justify-center items-start text-center min-h-screen pt-4">
         <div className="center-div w-full md:w-1/2 lg:w-1/3 p-4 opacity-80">
-          <h1 className="text-xl text-white p-4 tracking-wide font-bold">Download YouTube Videos</h1>
+          <h1 className="text-xl text-white p-4 tracking-wide font-bold">
+            Download YouTube Videos
+          </h1>
 
           <div className="mb-8 relative">
             <div className="hover:bg-slate-800 hover:opacity-80 absolute right-2 top-1/2 transform -translate-y-1/2 border p-1 rounded bg-zinc-800">
-              <button onClick={handlePaste} type="button" className="text-white font-semibold">
+              <button
+                onClick={handlePaste}
+                type="button"
+                className="text-white font-semibold"
+              >
                 Paste
               </button>
             </div>
@@ -106,58 +112,73 @@ export default function HomePage() {
             <button
               onClick={fetchVideoInfo}
               disabled={!youtubeVideoUrl || isFetching}
-              className={`w-full md:w-1/2 text-white px-4 py-2 rounded-lg bg-gray-800 tracking-wide border font-semibold ${!(!youtubeVideoUrl || isFetching) && 'hover:opacity-80'}`}
+              className={`w-full md:w-1/2 text-white px-4 py-2 rounded-lg bg-gray-800 tracking-wide border font-semibold ${
+                !(!youtubeVideoUrl || isFetching) && "hover:opacity-80"
+              }`}
             >
               {isFetching ? "Wait..." : "Proceed"}
             </button>
           </div>
 
-          {thumbnailUrl && (
-            <div className="mb-4 mx-auto">
-              <img
-                src={thumbnailUrl}
-                alt="Video Thumbnail"
-                className="rounded-md shadow-lg max-w-full"
-              />
+          {isFetching ? (
+            <div class="lds-roller">
+              {new Array(8).fill().map((_, i) => (
+                <div key={i}></div>
+              ))}
             </div>
-          )}
+          ) : (
+            <>
+              {thumbnailUrl && (
+                <div className="mb-4 mx-auto">
+                  <img
+                    src={thumbnailUrl}
+                    alt="Video Thumbnail"
+                    className="rounded-md shadow-lg max-w-full"
+                  />
+                </div>
+              )}
 
-          {videoTitle && (
-            <div className="text-white mb-2 font-bold">{videoTitle}</div>
-          )}
+              {videoTitle && (
+                <div className="text-white mb-2 font-bold">{videoTitle}</div>
+              )}
 
-          {availableQualities && availableQualities.length > 0 && (
-            <div className="text-white">
-              <h4 className="mb-2 tracking-wide font-semibold">Select Quality:</h4>
-              <ul className={`mb-4 ${isFetching ? "" : "fade-in"}`}>
-                {availableQualities.map((quality) => (
-                  <li
-                    key={quality}
-                    onClick={() =>
-                      handleQualityChange({ target: { value: quality } })
-                    }
-                    className={`cursor-pointer border mb-2 hover:opacity-60 tracking-wide ${quality === selectedQuality
-                      ? "bg-green-950"
-                      : "bg-zinc-950"
-                      } p-2 rounded-md`}
+              {availableQualities && availableQualities.length > 0 && (
+                <div className="text-white">
+                  <h4 className="mb-2 tracking-wide font-semibold">
+                    Select Quality:
+                  </h4>
+                  <ul className={`mb-4 ${isFetching ? "" : "fade-in"}`}>
+                    {availableQualities.map((quality) => (
+                      <li
+                        key={quality}
+                        onClick={() =>
+                          handleQualityChange({ target: { value: quality } })
+                        }
+                        className={`cursor-pointer border mb-2 hover:opacity-60 tracking-wide ${
+                          quality === selectedQuality
+                            ? "bg-green-950"
+                            : "bg-zinc-950"
+                        } p-2 rounded-md`}
+                      >
+                        {quality}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {availableQualities && selectedQuality && (
+                <div className="mb-4">
+                  <button
+                    onClick={handleDownload}
+                    disabled={isDownloading}
+                    className={`w-full md:w-1/2 text-white px-4 py-2 rounded-lg hover:opacity-80 tracking-wide font-semibold bg-gray-800 border`}
                   >
-                    {quality}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {availableQualities && selectedQuality && (
-            <div className="mb-4">
-              <button
-                onClick={handleDownload}
-                disabled={isDownloading}
-                className={`w-full md:w-1/2 text-white px-4 py-2 rounded-lg hover:opacity-80 tracking-wide font-semibold bg-gray-800 border`}
-              >
-                {isDownloading ? "Redirecting..." : "Download"}
-              </button>
-            </div>
+                    {isDownloading ? "Redirecting..." : "Download"}
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>
