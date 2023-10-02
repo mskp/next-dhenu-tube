@@ -108,7 +108,7 @@ export default function HomePage() {
             />
           </div>
 
-          <div className="mb-4">
+          <div className="mb-8">
             <button
               onClick={fetchVideoInfo}
               disabled={!youtubeVideoUrl || isFetching}
