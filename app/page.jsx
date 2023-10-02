@@ -83,11 +83,11 @@ export default function HomePage() {
     <main className="min-w-full min-h-screen backdrop-blur-sm">
       <div className="flex justify-center items-start text-center min-h-screen pt-4">
         <div className="center-div w-full md:w-1/2 lg:w-1/3 p-4 opacity-80">
-          <h1 className="text-xl text-white p-4">Download YouTube Videos</h1>
+          <h1 className="text-xl text-white p-4 tracking-wide font-bold">Download YouTube Videos</h1>
 
           <div className="mb-8 relative">
-            <div className="hover:bg-slate-800 hover:opacity-80 absolute right-2 top-1/2 transform -translate-y-1/2 border p-1 rounded bg-indigo-900">
-              <button onClick={handlePaste} type="button" className="text-white">
+            <div className="hover:bg-slate-800 hover:opacity-80 absolute right-2 top-1/2 transform -translate-y-1/2 border p-1 rounded bg-zinc-800">
+              <button onClick={handlePaste} type="button" className="text-white font-semibold">
                 Paste
               </button>
             </div>
@@ -97,7 +97,7 @@ export default function HomePage() {
               onChange={(e) => {
                 setYoutubeVideoUrl(e.target.value);
               }}
-              className="bg-transparent text-white w-full px-5 py-4 border rounded-lg outline-none pr-16"
+              className="bg-transparent tracking-wide text-white w-full px-5 py-4 border rounded-lg outline-none pr-16 font-semibold"
               placeholder="Paste the youtube video link here"
             />
           </div>
@@ -106,7 +106,7 @@ export default function HomePage() {
             <button
               onClick={fetchVideoInfo}
               disabled={!youtubeVideoUrl || isFetching}
-              className={`w-full md:w-1/2 text-white px-4 py-2 rounded-lg bg-gray-800 border ${!(!youtubeVideoUrl || isFetching) && 'hover:opacity-80'}`}
+              className={`w-full md:w-1/2 text-white px-4 py-2 rounded-lg bg-gray-800 tracking-wide border font-semibold ${!(!youtubeVideoUrl || isFetching) && 'hover:opacity-80'}`}
             >
               {isFetching ? "Wait..." : "Proceed"}
             </button>
@@ -128,7 +128,7 @@ export default function HomePage() {
 
           {availableQualities && availableQualities.length > 0 && (
             <div className="text-white">
-              <h4 className="mb-2">Select Quality:</h4>
+              <h4 className="mb-2 tracking-wide font-semibold">Select Quality:</h4>
               <ul className={`mb-4 ${isFetching ? "" : "fade-in"}`}>
                 {availableQualities.map((quality) => (
                   <li
@@ -136,9 +136,9 @@ export default function HomePage() {
                     onClick={() =>
                       handleQualityChange({ target: { value: quality } })
                     }
-                    className={`cursor-pointer border mb-2 hover:opacity-60 ${quality === selectedQuality
-                      ? "bg-orange-800"
-                      : "bg-slate-950"
+                    className={`cursor-pointer border mb-2 hover:opacity-60 tracking-wide ${quality === selectedQuality
+                      ? "bg-green-950"
+                      : "bg-zinc-950"
                       } p-2 rounded-md`}
                   >
                     {quality}
@@ -153,7 +153,7 @@ export default function HomePage() {
               <button
                 onClick={handleDownload}
                 disabled={isDownloading}
-                className={`w-full md:w-1/2 text-white px-4 py-2 rounded-lg hover:opacity-80 bg-gray-800 border`}
+                className={`w-full md:w-1/2 text-white px-4 py-2 rounded-lg hover:opacity-80 tracking-wide font-semibold bg-gray-800 border`}
               >
                 {isDownloading ? "Redirecting..." : "Download"}
               </button>
